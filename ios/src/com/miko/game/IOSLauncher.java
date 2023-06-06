@@ -5,13 +5,13 @@ import org.robovm.apple.uikit.UIApplication;
 
 import com.badlogic.gdx.backends.iosrobovm.IOSApplication;
 import com.badlogic.gdx.backends.iosrobovm.IOSApplicationConfiguration;
-import com.miko.game.view.GdxGame;
+import com.miko.game.view.GameView;
 
 public class IOSLauncher extends IOSApplication.Delegate {
     @Override
     protected IOSApplication createApplication() {
         IOSApplicationConfiguration config = new IOSApplicationConfiguration();
-        return new IOSApplication(new GdxGame(), config);
+        return new IOSApplication(new GameView(), config);
     }
 
     public static void main(String[] argv) {

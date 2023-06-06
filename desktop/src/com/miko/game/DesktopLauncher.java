@@ -2,7 +2,7 @@ package com.miko.game;
 
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
-import com.miko.game.view.GdxGame;
+import com.miko.game.view.GameView;
 
 // Please note that on macOS your application needs to be started with the -XstartOnFirstThread JVM argument
 public class DesktopLauncher {
@@ -10,7 +10,9 @@ public class DesktopLauncher {
 		Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
 		config.setForegroundFPS(120);
 		config.setTitle("miko-gdxgame");
-		//config.setFullscreenMode(Lwjgl3ApplicationConfiguration.getDisplayMode());
-		new Lwjgl3Application(new GdxGame(), config);
+		config.setWindowedMode(1700,700);
+		config.setResizable(false);
+		config.setFullscreenMode(Lwjgl3ApplicationConfiguration.getDisplayMode());
+		new Lwjgl3Application(new GameView(), config);
 	}
 }
