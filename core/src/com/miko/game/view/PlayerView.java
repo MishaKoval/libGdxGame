@@ -15,8 +15,8 @@ public class PlayerView {
     {
         this.player = player;
         playerImage = new Image(player.getTexture());
+        playerImage.setOrigin(player.getTexture().getWidth()/2.0f,player.getTexture().getHeight()/2.0f);
         playerImage.setPosition(player.getPos().x,player.getPos().y);
-        playerImage.setRotation(45);
     }
 
     public Image getPlayerImage()
@@ -28,7 +28,7 @@ public class PlayerView {
 
     public void drawPlayer(/*SpriteBatch batch*/)
     {
-        playerImage.setPosition(player.getPos().x,player.getPos().y);
+        playerImage.setPosition(player.getPos().x - player.getTexture().getWidth() / 2.0f,player.getPos().y - player.getTexture().getHeight() / 2.0f);
         playerImage.setRotation(player.GetRotation());
         //Vector2 playerPos = player.getPos();
         //Texture texture = player.getTexture();

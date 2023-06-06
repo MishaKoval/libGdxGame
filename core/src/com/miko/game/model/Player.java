@@ -11,12 +11,12 @@ public class Player
     private Texture texture;
     private Vector2 pos;
 
-    private int rotationAngle;
+    private float rotationAngle;
     public Player()
     {
         moveSpeed = 100;
         texture = new Texture("space-shooter-spritepack/PNG/playerShip2_red.png");
-        pos = new Vector2((Gdx.graphics.getWidth() - texture.getWidth())/2.0f,(Gdx.graphics.getHeight() - texture.getHeight())/2.0f);
+        pos = new Vector2(Gdx.graphics.getWidth()/2.0f,Gdx.graphics.getHeight()/2.0f);
     }
 
     public void SetMoveSpeed(float newSpeed)
@@ -28,7 +28,7 @@ public class Player
         return pos;
     };
 
-    public int GetRotation()
+    public float GetRotation()
     {
         return rotationAngle;
     }
@@ -49,7 +49,7 @@ public class Player
         pos.add(dir.scl(multiplier));
     }
 
-    public void Rotate(int angle)
+    public void Rotate(float angle)
     {
         rotationAngle = angle;
     }
