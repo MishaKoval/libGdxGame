@@ -23,7 +23,7 @@ public class GameView extends ApplicationAdapter {
 	private Player player;
 	private PlayerController playerController;
 
-	private BackGround backGround;
+	private Background backGround;
 
 	private Stage stage;
 
@@ -38,7 +38,7 @@ public class GameView extends ApplicationAdapter {
 		camera = new OrthographicCamera();
 		viewport = new ExtendViewport(VP_WIDTH, VP_HEIGHT, camera);
 		stage = new Stage(viewport);
-		backGround = new BackGround();
+		backGround = new Background();
 		player = new Player();
 		playerView = new PlayerView(player);
 		stage.addActor(backGround.GetBackGroundImage());

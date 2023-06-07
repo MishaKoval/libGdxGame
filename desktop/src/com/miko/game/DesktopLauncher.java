@@ -2,9 +2,7 @@ package com.miko.game;
 
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
-import com.badlogic.gdx.graphics.glutils.HdpiMode;
 import com.miko.game.view.GameView;
-import com.miko.game.view.TestMousePos;
 
 // Please note that on macOS your application needs to be started with the -XstartOnFirstThread JVM argument
 public class DesktopLauncher {
@@ -17,11 +15,4 @@ public class DesktopLauncher {
 		//config.setFullscreenMode(Lwjgl3ApplicationConfiguration.getDisplayMode());
 		new Lwjgl3Application(new GameView(), config);
 	}
-
-	/*public static void main (String[] arg) {
-		Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
-		config.setWindowedMode(1280,720);
-		config.setHdpiMode(HdpiMode.Pixels);
-		new Lwjgl3Application(new TestMousePos(), config);
-	}*/
 }

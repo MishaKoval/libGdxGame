@@ -11,4 +11,13 @@ public class Asteroid {
     {
         pos = new Vector2(x,y);
     }
+
+    public Vector2 getPos() {
+        return pos;
+    }
+
+    public void CalcCollideWithPlayer()
+    {
+
+    }
 }

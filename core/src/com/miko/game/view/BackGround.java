@@ -5,10 +5,10 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 
-public class BackGround {
+public class Background {
     private Image background;
 
-    public BackGround()
+    public Background()
     {
         Texture texture = new Texture("space-shooter-spritepack/Backgrounds/darkPurple.png");
         texture.setWrap(Texture.TextureWrap.MirroredRepeat,Texture.TextureWrap.MirroredRepeat);
