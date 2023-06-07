@@ -14,7 +14,7 @@ public class Player
         pos = new Vector2(Gdx.graphics.getWidth()/2.0f,Gdx.graphics.getHeight()/2.0f);
     }
 
-    public void SetMoveSpeed(float newSpeed)
+    public void setMoveSpeed(float newSpeed)
     {
         moveSpeed = newSpeed;
     }
@@ -22,19 +22,23 @@ public class Player
     {
         return pos;
     };
+    public void setPos(Vector2 newPos)
+    {
+        pos = newPos;
+    }
 
-    public float GetRotation()
+    public float getRotation()
     {
         return rotationAngle;
     }
 
-    public void Move(Vector2 dir)
+    public void move(Vector2 dir)
     {
         float multiplier = moveSpeed * Gdx.graphics.getDeltaTime();
         pos.add(dir.scl(multiplier));
     }
 
-    public void Rotate(float angle)
+    public void rotate(float angle)
     {
         rotationAngle = angle;
     }

@@ -19,7 +19,7 @@ public class PlayerController
         this.player = player;
     }
 
-    public void Update()
+    public void update()
     {
         if (Gdx.input.isKeyPressed(Input.Keys.A))
         {
@@ -39,11 +39,41 @@ public class PlayerController
         {
             inputAxis = Vector2.Zero;
         }
-        player.Move(inputAxis);
-        player.Rotate(rotateAngle);
+        player.move(inputAxis);
+        player.rotate(rotateAngle);
+        calcOutOfBorders();
     }
 
-    public void CalculateRotation(float mousePosX,float mousePosY)
+    private void calcOutOfBorders()
+    {
+        Vector2 currentPos = player.getPos();
+
+        if(currentPos.x > Gdx.graphics.getWidth())
+        {
+            Vector2 newPos = new Vector2(0,currentPos.y);
+            player.setPos(newPos);
+        }
+
+        if(currentPos.x < 0)
+        {
+            Vector2 newPos = new Vector2(Gdx.graphics.getWidth()-1,currentPos.y);
+            player.setPos(newPos);
+        }
+
+        if(currentPos.y > Gdx.graphics.getHeight())
+        {
+            Vector2 newPos = new Vector2(currentPos.x,0);
+            player.setPos(newPos);
+        }
+
+        if(currentPos.y < 0)
+        {
+            Vector2 newPos = new Vector2(currentPos.x,Gdx.graphics.getHeight() - 1);
+            player.setPos(newPos);
+        }
+    }
+
+    public void calculateRotation(float mousePosX,float mousePosY)
     {
         double degrees = Math.atan2(
                 player.getPos().y - mousePosY,

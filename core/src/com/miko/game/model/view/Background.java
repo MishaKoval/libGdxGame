@@ -1,4 +1,4 @@
-package com.miko.game.view;
+package com.miko.game.model.view;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
@@ -22,9 +22,14 @@ public class Background {
         background.setRotation(0);
     }
 
-    public Image GetBackGroundImage()
+    public Image getBackgroundImage()
     {
         return background;
+    }
+
+    public void dispose()
+    {
+        background.remove();
     }
 
 }

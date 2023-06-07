@@ -1,4 +1,4 @@
-package com.miko.game.view;
+package com.miko.game.model.view;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -27,11 +27,12 @@ public class PlayerView {
     public void drawPlayer()
     {
         playerImage.setPosition(player.getPos().x - texture.getWidth() / 2.0f,player.getPos().y - texture.getHeight() / 2.0f);
-        playerImage.setRotation(player.GetRotation());
+        playerImage.setRotation(player.getRotation());
     }
 
     public void dispose()
     {
         texture.dispose();
+        playerImage.remove();
     }
 }

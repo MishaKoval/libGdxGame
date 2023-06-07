@@ -1,4 +1,4 @@
-package com.miko.game.view;
+package com.miko.game;
 
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.ApplicationAdapter;
@@ -9,35 +9,47 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
+import com.miko.game.controller.AsteroidController;
 import com.miko.game.controller.PlayerController;
+import com.miko.game.model.Asteroid;
 import com.miko.game.model.Player;
+import com.miko.game.model.view.AsteroidView;
+import com.miko.game.model.view.Background;
+import com.miko.game.model.view.PlayerView;
 
-public class GameView extends ApplicationAdapter {
+public class Game extends ApplicationAdapter {
 
 	private PlayerView playerView;
 	private Player player;
 	private PlayerController playerController;
-
-	private Background backGround;
-
+	private Background background;
 	private Stage stage;
-
-	private Vector3 worldSpaceMousePos = new Vector3();
-
 	private OrthographicCamera camera;
-
 	private ExtendViewport viewport;
+
+	private Asteroid asteroid;
+
+	private AsteroidView asteroidView;
+
+	private AsteroidController asteroidController;
 	
 	@Override
 	public void create () {
 		camera = new OrthographicCamera();
 		viewport = new ExtendViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), camera);
 		stage = new Stage(viewport);
-		backGround = new Background();
+		background = new Background();
 		player = new Player();
 		playerView = new PlayerView(player);
-		stage.addActor(backGround.GetBackGroundImage());
+
+		asteroid = new Asteroid(100,100);
+		asteroidView = new AsteroidView(asteroid);
+		asteroidController = new AsteroidController(asteroid);
+
+
+		stage.addActor(background.getBackgroundImage());
 		stage.addActor(playerView.getPlayerImage());
+		stage.addActor(asteroidView.getAsteroidImage());
 		playerController = new PlayerController(player);
 		Gdx.graphics.setSystemCursor(Cursor.SystemCursor.Crosshair);
 		Gdx.app.setLogLevel(Application.LOG_DEBUG);
@@ -49,35 +61,43 @@ public class GameView extends ApplicationAdapter {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		stage.act();
 		SetWorldMousePos(Gdx.input.getX(),Gdx.input.getY());
-		playerController.Update();
+		playerController.update();
 		playerView.drawPlayer();
+		asteroidController.isCollideWithPlayer(player.getPos());
+		asteroidView.drawAsteroid();
 		stage.draw();
 	}
 
 	@Override
-	public void pause () {
+	public void pause ()
+	{
 
 	}
 
 	@Override
-	public void resize (int width, int height) {
+	public void resize (int width, int height)
+	{
 		viewport.update(width, height, true);
 	}
 
 	@Override
-	public void resume () {
+	public void resume ()
+	{
 
 	}
 	
 	@Override
-	public void dispose () {
+	public void dispose ()
+	{
 		playerView.dispose();
+		asteroidView.dispose();
+		background.dispose();
 	}
 
 	private void SetWorldMousePos(float screenX,float screenY)
 	{
-		worldSpaceMousePos = camera.unproject(new Vector3(screenX,screenY,0));
-		playerController.CalculateRotation(worldSpaceMousePos.x,worldSpaceMousePos.y);
+		Vector3 worldSpaceMousePos = camera.unproject(new Vector3(screenX,screenY,0));
+		playerController.calculateRotation(worldSpaceMousePos.x,worldSpaceMousePos.y);
 	}
 
 }
