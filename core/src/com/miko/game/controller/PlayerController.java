@@ -7,6 +7,8 @@ import com.miko.game.model.Player;
 
 public class PlayerController
 {
+    private final int rotateOffset = 90;
+
     private Player player;
 
     private Vector2 inputAxis;
@@ -73,12 +75,12 @@ public class PlayerController
         }
     }
 
-    public void calculateRotation(float mousePosX,float mousePosY)
+    public void calculateRotation(float worldMousePosX,float worldMousePosY)
     {
         double degrees = Math.atan2(
-                player.getPos().y - mousePosY,
-                player.getPos().x - mousePosX
+                player.getPos().y - worldMousePosY,
+                player.getPos().x - worldMousePosX
         ) * 180.0d / Math.PI;
-        rotateAngle = (float) degrees + 90;
+        rotateAngle = (float) degrees + rotateOffset;
     }
 }

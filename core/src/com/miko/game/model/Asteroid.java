@@ -23,7 +23,6 @@ public class Asteroid {
     {
         borders = new Rectangle(x,y,width,height);
     }
-
     public Vector2 getPos()
     {
         return pos;

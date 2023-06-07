@@ -14,6 +14,12 @@ public class Player
         pos = new Vector2(Gdx.graphics.getWidth()/2.0f,Gdx.graphics.getHeight()/2.0f);
     }
 
+    public void reset()
+    {
+        pos = new Vector2(Gdx.graphics.getWidth()/2.0f,Gdx.graphics.getHeight()/2.0f);
+        rotationAngle = 0;
+    }
+
     public void setMoveSpeed(float newSpeed)
     {
         moveSpeed = newSpeed;

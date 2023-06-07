@@ -13,9 +13,9 @@ import com.miko.game.controller.AsteroidController;
 import com.miko.game.controller.PlayerController;
 import com.miko.game.model.Asteroid;
 import com.miko.game.model.Player;
-import com.miko.game.model.view.AsteroidView;
-import com.miko.game.model.view.Background;
-import com.miko.game.model.view.PlayerView;
+import com.miko.game.view.AsteroidView;
+import com.miko.game.view.Background;
+import com.miko.game.view.PlayerView;
 
 public class Game extends ApplicationAdapter {
 
@@ -44,7 +44,7 @@ public class Game extends ApplicationAdapter {
 
 		asteroid = new Asteroid(100,100);
 		asteroidView = new AsteroidView(asteroid);
-		asteroidController = new AsteroidController(asteroid);
+		asteroidController = new AsteroidController(asteroid,asteroidView);
 
 
 		stage.addActor(background.getBackgroundImage());

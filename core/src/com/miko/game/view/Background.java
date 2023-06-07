@@ -1,4 +1,4 @@
-package com.miko.game.model.view;
+package com.miko.game.view;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
