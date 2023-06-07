@@ -24,9 +24,7 @@ public class TestMousePos extends ApplicationAdapter implements InputProcessor {
 
     @Override public void create () {
         camera = new OrthographicCamera();
-        // pick a viewport that suits your thing, ExtendViewport is a good start
         viewport = new ExtendViewport(VP_WIDTH, VP_HEIGHT, camera);
-        // ShapeRenderer so we can see our touch point
         shapes = new ShapeRenderer();
         Gdx.input.setInputProcessor(this);
     }

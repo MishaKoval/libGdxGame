@@ -2,11 +2,10 @@ package com.miko.game.controller;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.math.Vector2;
 import com.miko.game.model.Player;
 
-public class PlayerController /*implements InputProcessor*/
+public class PlayerController
 {
     private Player player;
 
@@ -44,57 +43,12 @@ public class PlayerController /*implements InputProcessor*/
         player.Rotate(rotateAngle);
     }
 
-    public void CalculateRotation(float mousePosX,float mousePosY, float playerPosX,float playerPosY)
+    public void CalculateRotation(float mousePosX,float mousePosY)
     {
         double degrees = Math.atan2(
-                playerPosY - mousePosY,
-                playerPosX - mousePosX
+                player.getPos().y - mousePosY,
+                player.getPos().x - mousePosX
         ) * 180.0d / Math.PI;
-        Gdx.app.log("Poses :",mousePosX + " " + mousePosY + " " + playerPosX + " " + playerPosY);
-        rotateAngle = (float) degrees - 90;
-        Gdx.app.log("Angle :",String.valueOf(rotateAngle));
+        rotateAngle = (float) degrees + 90;
     }
-
-    /*@Override
-    public boolean keyDown(int keycode) {
-        return false;
-    }
-
-    @Override
-    public boolean keyUp(int keycode) {
-        return false;
-    }
-
-    @Override
-    public boolean keyTyped(char character) {
-        return false;
-    }
-
-    @Override
-    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        return false;
-    }
-
-    @Override
-    public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-        CalculateRotation(screenX,screenY);
-        return false;
-    }
-
-    @Override
-    public boolean touchDragged(int screenX, int screenY, int pointer) {
-        CalculateRotation(screenX,screenY);
-        return false;
-    }
-
-    @Override
-    public boolean mouseMoved(int screenX, int screenY) {
-        CalculateRotation(screenX,screenY);
-        return false;
-    }
-
-    @Override
-    public boolean scrolled(float amountX, float amountY) {
-        return false;
-    }*/
 }

@@ -1,21 +1,19 @@
 package com.miko.game.view;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.miko.game.model.Player;
 
 public class PlayerView {
     private Player player;
+    private Texture texture;
     private Image playerImage;
     public PlayerView(Player player)
     {
         this.player = player;
-        playerImage = new Image(player.getTexture());
-        playerImage.setOrigin(player.getTexture().getWidth()/2.0f,player.getTexture().getHeight()/2.0f);
+        texture = new Texture("space-shooter-spritepack/PNG/playerShip2_red.png");
+        playerImage = new Image(texture);
+        playerImage.setOrigin(texture.getWidth()/2.0f,texture.getHeight()/2.0f);
         playerImage.setPosition(player.getPos().x,player.getPos().y);
     }
 
@@ -26,17 +24,14 @@ public class PlayerView {
 
     public int angle = 0;
 
-    public void drawPlayer(/*SpriteBatch batch*/)
+    public void drawPlayer()
     {
-        playerImage.setPosition(player.getPos().x - player.getTexture().getWidth() / 2.0f,player.getPos().y - player.getTexture().getHeight() / 2.0f);
-        playerImage.setRotation(-player.GetRotation());
-        //Vector2 playerPos = player.getPos();
-        //Texture texture = player.getTexture();
-        //batch.draw(texture,playerPos.x,playerPos.y,texture.getWidth(),texture.getHeight());
+        playerImage.setPosition(player.getPos().x - texture.getWidth() / 2.0f,player.getPos().y - texture.getHeight() / 2.0f);
+        playerImage.setRotation(player.GetRotation());
     }
 
     public void dispose()
     {
-        player.getTexture().dispose();
+        texture.dispose();
     }
 }
