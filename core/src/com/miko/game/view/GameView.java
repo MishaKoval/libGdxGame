@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Cursor;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.ScreenUtils;
@@ -100,6 +101,13 @@ public class GameView extends ApplicationAdapter implements InputProcessor {
 	}
 
 
+	private void CalcPlayerRotation(float screenX,float screenY)
+	{
+		worldSpaceMousePos = camera.project(new Vector3(screenX,screenY,0));
+		Vector3 worldSpacePlayerPos = camera.unproject(new Vector3(player.getPos().x,player.getPos().y,0));
+		playerController.CalculateRotation(worldSpaceMousePos.x,worldSpaceMousePos.y,worldSpacePlayerPos.x,worldSpacePlayerPos.y);
+	}
+
 	@Override
 	public boolean keyDown(int keycode) {
 		return false;
@@ -117,9 +125,7 @@ public class GameView extends ApplicationAdapter implements InputProcessor {
 
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-		worldSpaceMousePos = camera.project(new Vector3(screenX,screenY,0));
-		playerController.CalculateRotation(worldSpaceMousePos.x,worldSpaceMousePos.y);
-		//Gdx.app.log("MousePos :",worldSpaceMousePos.x + " " + worldSpaceMousePos.y);
+		CalcPlayerRotation(screenX,screenY);
 		return true;
 	}
 
@@ -130,14 +136,11 @@ public class GameView extends ApplicationAdapter implements InputProcessor {
 
 	@Override
 	public boolean touchDragged(int screenX, int screenY, int pointer) {
-		worldSpaceMousePos = camera.project(new Vector3(screenX,screenY,0));
-		playerController.CalculateRotation(screenX,screenY);
+		CalcPlayerRotation(screenX,screenY);
 		return true;
 	}
 	@Override public boolean mouseMoved (int screenX, int screenY) {
-		worldSpaceMousePos = camera.project(new Vector3(screenX,screenY,0));
-		playerController.CalculateRotation(worldSpaceMousePos.x,worldSpaceMousePos.y);
-		//Gdx.app.log("MousePos :",worldSpaceMousePos.x + " " + worldSpaceMousePos.y);
+		CalcPlayerRotation(screenX,screenY);
 		return true;
 	}
 

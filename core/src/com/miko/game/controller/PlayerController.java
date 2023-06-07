@@ -44,16 +44,15 @@ public class PlayerController /*implements InputProcessor*/
         player.Rotate(rotateAngle);
     }
 
-    public void CalculateRotation(float mousePosX,float mousePosY)
+    public void CalculateRotation(float mousePosX,float mousePosY, float playerPosX,float playerPosY)
     {
-        Vector2 playerPos = player.getPos();
-        //Gdx.app.log("PlayerPos :",playerPos.x + " " + playerPos.y);
-
         double degrees = Math.atan2(
-                playerPos.x - mousePosX,
-                playerPos.y - mousePosY
+                playerPosY - mousePosY,
+                playerPosX - mousePosX
         ) * 180.0d / Math.PI;
-        rotateAngle = (float) degrees;
+        Gdx.app.log("Poses :",mousePosX + " " + mousePosY + " " + playerPosX + " " + playerPosY);
+        rotateAngle = (float) degrees - 90;
+        Gdx.app.log("Angle :",String.valueOf(rotateAngle));
     }
 
     /*@Override
