@@ -14,11 +14,6 @@ import com.miko.game.model.Player;
 
 public class GameView extends ApplicationAdapter {
 
-	public final static float SCALE = 1f;
-	public final static float INV_SCALE = 1.f/SCALE;
-	public final static float VP_WIDTH = 1280 * INV_SCALE;
-	public final static float VP_HEIGHT = 720 * INV_SCALE;
-
 	private PlayerView playerView;
 	private Player player;
 	private PlayerController playerController;
@@ -36,7 +31,7 @@ public class GameView extends ApplicationAdapter {
 	@Override
 	public void create () {
 		camera = new OrthographicCamera();
-		viewport = new ExtendViewport(VP_WIDTH, VP_HEIGHT, camera);
+		viewport = new ExtendViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), camera);
 		stage = new Stage(viewport);
 		backGround = new Background();
 		player = new Player();
