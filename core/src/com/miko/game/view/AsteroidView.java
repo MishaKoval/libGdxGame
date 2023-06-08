@@ -1,10 +1,9 @@
 package com.miko.game.view;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.miko.game.model.Asteroid;
-
-import java.util.Random;
 
 public class AsteroidView {
 
@@ -22,6 +21,11 @@ public class AsteroidView {
         asteroid.setBordersSize(texture.getWidth(),texture.getHeight());
     }
 
+    public Image getAsteroidImage()
+    {
+        return asteroidImage;
+    }
+
     public void drawAsteroid()
     {
         asteroidImage.setPosition(asteroid.getPos().x - texture.getWidth() / 2.0f,asteroid.getPos().y - texture.getHeight() / 2.0f);
@@ -29,8 +33,7 @@ public class AsteroidView {
 
     private String randomizeTexturePath()
     {
-        Random random = new Random();
-        int rand = random.nextInt(3);
+        int rand = MathUtils.random(0,2);
         String brownBigTexturePath = "space-shooter-spritepack/PNG/Meteors/meteorBrown_big1.png";
         String greyBigTexturePath = "space-shooter-spritepack/PNG/Meteors/meteorGrey_big2.png";
         String brownMedTexturePath = "space-shooter-spritepack/PNG/Meteors/meteorBrown_med3.png";
@@ -44,11 +47,6 @@ public class AsteroidView {
                 return brownMedTexturePath;
         }
         return null;
-    }
-
-    public Image getAsteroidImage()
-    {
-       return asteroidImage;
     }
 
     public void dispose()

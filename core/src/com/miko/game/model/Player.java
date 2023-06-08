@@ -20,10 +20,6 @@ public class Player
         rotationAngle = 0;
     }
 
-    public void setMoveSpeed(float newSpeed)
-    {
-        moveSpeed = newSpeed;
-    }
     public Vector2 getPos()
     {
         return pos;

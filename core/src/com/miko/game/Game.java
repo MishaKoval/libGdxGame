@@ -24,13 +24,6 @@ public class Game extends ApplicationAdapter {
 	private Stage stage;
 	private OrthographicCamera camera;
 	private ExtendViewport viewport;
-
-	//private Asteroid asteroid;
-
-	//private AsteroidView asteroidView;
-
-	//private AsteroidController asteroidController;
-
 	private AsteroidsController asteroidsController;
 	
 	@Override
@@ -39,21 +32,18 @@ public class Game extends ApplicationAdapter {
 		viewport = new ExtendViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), camera);
 		stage = new Stage(viewport);
 		background = new Background();
+
 		player = new Player();
 		playerView = new PlayerView(player);
-
-		//asteroid = new Asteroid(100,100);
-		//asteroidView = new AsteroidView(asteroid);
-		//asteroidController = new AsteroidController(asteroid,asteroidView);
-
-
+		playerController = new PlayerController(player);
 
 		stage.addActor(background.getBackgroundImage());
+
 		asteroidsController = new AsteroidsController(player);
 		asteroidsController.init(stage);
+
 		stage.addActor(playerView.getPlayerImage());
-		//stage.addActor(asteroidView.getAsteroidImage());
-		playerController = new PlayerController(player);
+
 		Gdx.graphics.setSystemCursor(Cursor.SystemCursor.Crosshair);
 		Gdx.app.setLogLevel(Application.LOG_DEBUG);
 	}
@@ -63,7 +53,7 @@ public class Game extends ApplicationAdapter {
 		Gdx.gl.glClearColor(1,1,1,1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		stage.act();
-		SetWorldMousePos(Gdx.input.getX(),Gdx.input.getY());
+		setWorldMousePos(Gdx.input.getX(),Gdx.input.getY());
 		playerController.update();
 		playerView.drawPlayer();
 		asteroidsController.update();
@@ -75,32 +65,20 @@ public class Game extends ApplicationAdapter {
 	}
 
 	@Override
-	public void pause ()
-	{
-
-	}
-
-	@Override
 	public void resize (int width, int height)
 	{
 		viewport.update(width, height, true);
 	}
 
 	@Override
-	public void resume ()
-	{
-
-	}
-	
-	@Override
 	public void dispose ()
 	{
 		playerView.dispose();
-		//asteroidView.dispose();
 		background.dispose();
+		asteroidsController.dispose();
 	}
 
-	private void SetWorldMousePos(float screenX,float screenY)
+	private void setWorldMousePos(float screenX, float screenY)
 	{
 		Vector3 worldSpaceMousePos = camera.unproject(new Vector3(screenX,screenY,0));
 		playerController.calculateRotation(worldSpaceMousePos.x,worldSpaceMousePos.y);
@@ -113,4 +91,15 @@ public class Game extends ApplicationAdapter {
 		asteroidsController.init(stage);
 	}
 
+	@Override
+	public void pause ()
+	{
+
+	}
+
+	@Override
+	public void resume ()
+	{
+
+	}
 }

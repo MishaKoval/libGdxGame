@@ -19,6 +19,11 @@ public class AsteroidController
         calcOutOfBorders();
     }
 
+    public boolean isCollideWithPlayer(Vector2 playerPos)
+    {
+        return asteroid.getBorders().contains(playerPos);
+    }
+
     private void calcOutOfBorders()
     {
         Vector2 currentPos = asteroid.getPos();
@@ -46,10 +51,5 @@ public class AsteroidController
             Vector2 newPos = new Vector2(currentPos.x,Gdx.graphics.getHeight() - 1);
             asteroid.setPos(newPos);
         }
-    }
-
-    public boolean isCollideWithPlayer(Vector2 playerPos)
-    {
-        return asteroid.getBorders().contains(playerPos);
     }
 }

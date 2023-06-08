@@ -45,18 +45,6 @@ public class AsteroidsController {
         }
     }
 
-    private Vector2 getRandomPoint()
-    {
-        float randX;
-        float randY;
-        do {
-            randX = MathUtils.random(1,Gdx.graphics.getWidth()-1);
-            randY = MathUtils.random(1, Gdx.graphics.getHeight()-1);
-        }
-        while ((Math.abs(randX - player.getPos().x) < offsetFromPlayer) && (Math.abs(randY - player.getPos().y) < offsetFromPlayer));
-        return new Vector2(randX,randY);
-    }
-
     public void init(Stage stage)
     {
         for (int i =0;i< maxAsteroidsCount;i++)
@@ -68,11 +56,6 @@ public class AsteroidsController {
             asteroidViews.add(asteroidView);
             stage.addActor(asteroidView.getAsteroidImage());
         }
-    }
-
-    public void spawnAsteroid()
-    {
-
     }
 
     public boolean checkCollisions()
@@ -87,8 +70,23 @@ public class AsteroidsController {
         return false;
     }
 
-    private void destroyAsteroid(AsteroidController asteroidController)
+    private Vector2 getRandomPoint()
     {
+        float randX;
+        float randY;
+        do {
+            randX = MathUtils.random(1,Gdx.graphics.getWidth()-1);
+            randY = MathUtils.random(1, Gdx.graphics.getHeight()-1);
+        }
+        while ((Math.abs(randX - player.getPos().x) < offsetFromPlayer) && (Math.abs(randY - player.getPos().y) < offsetFromPlayer));
+        return new Vector2(randX,randY);
+    }
 
+    public void dispose()
+    {
+        for (int i = 0;i < asteroidControllers.size();i++)
+        {
+            asteroidViews.get(i).dispose();
+        }
     }
 }

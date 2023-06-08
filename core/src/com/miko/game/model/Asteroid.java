@@ -11,7 +11,6 @@ public class Asteroid {
 
     private final float moveSpeed;
 
-    private final float directionAngle;
     private float width;
 
     private final Vector2 dir;
@@ -22,21 +21,16 @@ public class Asteroid {
     {
         this.pos = pos;
         moveSpeed = 75;
-        directionAngle = MathUtils.random(0,359);
-
+        float directionAngle = MathUtils.random(0, 359);
         float xOffset = (float) Math.sin(Math.toRadians(directionAngle));
         float yOffset = (float) Math.cos(Math.toRadians(directionAngle));
-        Gdx.app.log("x:", String.valueOf(xOffset));
-        Gdx.app.log("y:", String.valueOf(yOffset));
         dir = new Vector2(xOffset,yOffset);
     }
 
     public void move()
     {
-            float multiplier = moveSpeed * Gdx.graphics.getDeltaTime();
-            Gdx.app.log("x:", String.valueOf(dir.x));
-            Gdx.app.log("y:", String.valueOf(dir.y));
-            pos.add(dir.cpy().scl(multiplier));
+        float multiplier = moveSpeed * Gdx.graphics.getDeltaTime();
+        pos.add(dir.cpy().scl(multiplier));
     }
 
     public Rectangle getBorders()
