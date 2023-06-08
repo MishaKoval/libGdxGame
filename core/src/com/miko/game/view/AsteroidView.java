@@ -8,15 +8,9 @@ import java.util.Random;
 
 public class AsteroidView {
 
-    private final String brownBigTexturePath = "space-shooter-spritepack/PNG/Meteors/meteorBrown_big1.png";
-
-    private final String greyBigTexturePath = "space-shooter-spritepack/PNG/Meteors/meteorGrey_big2.png";
-
-    private final String brownMedTexturePath = "space-shooter-spritepack/PNG/Meteors/meteorBrown_med3.png";
-
-    private Asteroid asteroid;
-    private Texture texture;
-    private Image asteroidImage;
+    private final Asteroid asteroid;
+    private final Texture texture;
+    private final Image asteroidImage;
 
     public AsteroidView(Asteroid asteroid)
     {
@@ -25,7 +19,7 @@ public class AsteroidView {
         asteroidImage = new Image(texture);
         asteroidImage.setOrigin(texture.getWidth()/2.0f,texture.getHeight()/2.0f);
         asteroidImage.setPosition(asteroid.getPos().x,asteroid.getPos().y);
-        asteroid.SetBorders(asteroid.getPos().x - texture.getWidth() / 2.0f,asteroid.getPos().y - texture.getHeight() / 2.0f,texture.getWidth(),texture.getHeight());
+        asteroid.setBordersSize(texture.getWidth(),texture.getHeight());
     }
 
     public void drawAsteroid()
@@ -37,6 +31,9 @@ public class AsteroidView {
     {
         Random random = new Random();
         int rand = random.nextInt(3);
+        String brownBigTexturePath = "space-shooter-spritepack/PNG/Meteors/meteorBrown_big1.png";
+        String greyBigTexturePath = "space-shooter-spritepack/PNG/Meteors/meteorGrey_big2.png";
+        String brownMedTexturePath = "space-shooter-spritepack/PNG/Meteors/meteorBrown_med3.png";
         switch (rand)
         {
             case 0:

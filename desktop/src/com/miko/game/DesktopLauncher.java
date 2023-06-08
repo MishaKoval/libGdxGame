@@ -10,8 +10,7 @@ public class DesktopLauncher {
 		config.setForegroundFPS(120);
 		config.setTitle("miko-gdxgame");
 		config.setWindowedMode(1280,720);
-		config.setResizable(false);
-		config.setFullscreenMode(Lwjgl3ApplicationConfiguration.getDisplayMode());
+		//config.setFullscreenMode(Lwjgl3ApplicationConfiguration.getDisplayMode());
 		new Lwjgl3Application(new Game(), config);
 	}
 }

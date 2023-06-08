@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 
 public class Background {
-    private Image background;
+    private final Image background;
 
     public Background()
     {

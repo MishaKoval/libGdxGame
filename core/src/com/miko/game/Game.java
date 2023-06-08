@@ -9,11 +9,9 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
-import com.miko.game.controller.AsteroidController;
+import com.miko.game.controller.AsteroidsController;
 import com.miko.game.controller.PlayerController;
-import com.miko.game.model.Asteroid;
 import com.miko.game.model.Player;
-import com.miko.game.view.AsteroidView;
 import com.miko.game.view.Background;
 import com.miko.game.view.PlayerView;
 
@@ -27,11 +25,13 @@ public class Game extends ApplicationAdapter {
 	private OrthographicCamera camera;
 	private ExtendViewport viewport;
 
-	private Asteroid asteroid;
+	//private Asteroid asteroid;
 
-	private AsteroidView asteroidView;
+	//private AsteroidView asteroidView;
 
-	private AsteroidController asteroidController;
+	//private AsteroidController asteroidController;
+
+	private AsteroidsController asteroidsController;
 	
 	@Override
 	public void create () {
@@ -42,14 +42,17 @@ public class Game extends ApplicationAdapter {
 		player = new Player();
 		playerView = new PlayerView(player);
 
-		asteroid = new Asteroid(100,100);
-		asteroidView = new AsteroidView(asteroid);
-		asteroidController = new AsteroidController(asteroid,asteroidView);
+		//asteroid = new Asteroid(100,100);
+		//asteroidView = new AsteroidView(asteroid);
+		//asteroidController = new AsteroidController(asteroid,asteroidView);
+
 
 
 		stage.addActor(background.getBackgroundImage());
+		asteroidsController = new AsteroidsController(player);
+		asteroidsController.init(stage);
 		stage.addActor(playerView.getPlayerImage());
-		stage.addActor(asteroidView.getAsteroidImage());
+		//stage.addActor(asteroidView.getAsteroidImage());
 		playerController = new PlayerController(player);
 		Gdx.graphics.setSystemCursor(Cursor.SystemCursor.Crosshair);
 		Gdx.app.setLogLevel(Application.LOG_DEBUG);
@@ -63,8 +66,11 @@ public class Game extends ApplicationAdapter {
 		SetWorldMousePos(Gdx.input.getX(),Gdx.input.getY());
 		playerController.update();
 		playerView.drawPlayer();
-		asteroidController.isCollideWithPlayer(player.getPos());
-		asteroidView.drawAsteroid();
+		asteroidsController.update();
+		if (asteroidsController.checkCollisions())
+		{
+			gameOver();
+		}
 		stage.draw();
 	}
 
@@ -90,7 +96,7 @@ public class Game extends ApplicationAdapter {
 	public void dispose ()
 	{
 		playerView.dispose();
-		asteroidView.dispose();
+		//asteroidView.dispose();
 		background.dispose();
 	}
 
@@ -98,6 +104,13 @@ public class Game extends ApplicationAdapter {
 	{
 		Vector3 worldSpaceMousePos = camera.unproject(new Vector3(screenX,screenY,0));
 		playerController.calculateRotation(worldSpaceMousePos.x,worldSpaceMousePos.y);
+	}
+
+	private void gameOver()
+	{
+		asteroidsController.reset();
+		player.reset();
+		asteroidsController.init(stage);
 	}
 
 }

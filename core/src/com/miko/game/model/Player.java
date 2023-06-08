@@ -27,7 +27,7 @@ public class Player
     public Vector2 getPos()
     {
         return pos;
-    };
+    }
     public void setPos(Vector2 newPos)
     {
         pos = newPos;

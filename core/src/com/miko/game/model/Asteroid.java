@@ -1,5 +1,7 @@
 package com.miko.game.model;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
@@ -7,24 +9,53 @@ public class Asteroid {
 
     private Vector2 pos;
 
-    private Rectangle borders;
+    private final float moveSpeed;
 
-    public Asteroid(float x,float y)
+    private final float directionAngle;
+    private float width;
+
+    private final Vector2 dir;
+
+    private float height;
+
+    public Asteroid(Vector2 pos)
     {
-        pos = new Vector2(x,y);
+        this.pos = pos;
+        moveSpeed = 75;
+        directionAngle = MathUtils.random(0,359);
+
+        float xOffset = (float) Math.sin(Math.toRadians(directionAngle));
+        float yOffset = (float) Math.cos(Math.toRadians(directionAngle));
+        Gdx.app.log("x:", String.valueOf(xOffset));
+        Gdx.app.log("y:", String.valueOf(yOffset));
+        dir = new Vector2(xOffset,yOffset);
+    }
+
+    public void move()
+    {
+            float multiplier = moveSpeed * Gdx.graphics.getDeltaTime();
+            Gdx.app.log("x:", String.valueOf(dir.x));
+            Gdx.app.log("y:", String.valueOf(dir.y));
+            pos.add(dir.cpy().scl(multiplier));
     }
 
     public Rectangle getBorders()
     {
-        return borders;
+        return new Rectangle(pos.x - width / 2.0f,pos.y - height / 2.0f,width,height);
     };
 
-    public void SetBorders(float x,float y,int width,int height)
+    public void setBordersSize(int width,int height)
     {
-        borders = new Rectangle(x,y,width,height);
+        this.width = width;
+        this.height = height;
     }
     public Vector2 getPos()
     {
         return pos;
+    }
+
+    public void setPos(Vector2 newPos)
+    {
+        pos = newPos;
     }
 }

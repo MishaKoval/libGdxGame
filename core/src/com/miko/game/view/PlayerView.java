@@ -5,9 +5,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.miko.game.model.Player;
 
 public class PlayerView {
-    private Player player;
-    private Texture texture;
-    private Image playerImage;
+    private final Player player;
+    private final Texture texture;
+    private final Image playerImage;
     public PlayerView(Player player)
     {
         this.player = player;
@@ -21,8 +21,6 @@ public class PlayerView {
     {
         return playerImage;
     }
-
-    public int angle = 0;
 
     public void drawPlayer()
     {
