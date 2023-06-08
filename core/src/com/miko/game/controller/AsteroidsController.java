@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 public class AsteroidsController {
 
-    private static final int maxAsteroidsCount = 1;
+    private static final int maxAsteroidsCount = 6;
 
     private static final int offsetFromPlayer = 50;
 
